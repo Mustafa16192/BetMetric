@@ -2,23 +2,31 @@ FROM python:3.11
 
 WORKDIR /app
 
+# Set ENV variables for Poetry
+ENV POETRY_HOME="/opt/poetry" \
+    POETRY_VIRTUALENVS_IN_PROJECT=true \
+    POETRY_NO_INTERACTION=1
+
+# Add Poetry to PATH
+ENV PATH="$POETRY_HOME/bin:$PATH"
+
 RUN apt-get update && apt-get install -y \
     build-essential \
     libpq-dev \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
-RUN curl -sSL https://install.python-poetry.org | python - 
+# Install Poetry
+RUN curl -sSL https://install.python-poetry.org | python3 - 
 
-ENV PATH="/root/.poetry/bin:$PATH"
-
-# Copy files from the build context root.
-# On Railway, ensure 'Root Directory' is set to 'backend' so this finds pyproject.toml
+# Copy dependency files
 COPY pyproject.toml poetry.lock ./
 
-RUN poetry install --no-root --no-interaction --no-ansi
+# Install dependencies
+RUN poetry install --no-root
 
-# Copy the rest of the application code
+# Copy application
 COPY . .
 
+# Run application
 CMD ["poetry", "run", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
