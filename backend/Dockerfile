@@ -12,17 +12,13 @@ RUN curl -sSL https://install.python-poetry.org | python -
 
 ENV PATH="/root/.poetry/bin:$PATH"
 
-# Copy ONLY dependency definition files first (to cache dependencies)
-# We assume build context is repo root.
-COPY backend/pyproject.toml backend/poetry.lock /app/
+# Copy files from the build context root.
+# On Railway, ensure 'Root Directory' is set to 'backend' so this finds pyproject.toml
+COPY pyproject.toml poetry.lock ./
 
-# Install dependencies
 RUN poetry install --no-root --no-interaction --no-ansi
 
-# Copy the ENTIRE backend directory into /app
-# This ensures we get 'app', 'alembic', 'alembic.ini' etc.
-# Docker 'COPY src dest' copies contents of src into dest.
-COPY backend /app
+# Copy the rest of the application code
+COPY . .
 
-# Command to run the application
 CMD ["poetry", "run", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
