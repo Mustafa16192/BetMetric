@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    margin: 0;
+    background: radial-gradient(circle at top left, #1a1a1a 0%, #050505 55%);
+    color: #f8fafc;
+    font-family: 'Inter', system-ui, sans-serif;
+    color-scheme: dark;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+@layer components {
+  .surface-card {
+    @apply rounded-lg border border-border-subtle bg-surface-100;
+  }
+
+  .surface-card--raised {
+    @apply rounded-lg border border-border-subtle bg-surface-200;
+  }
+
+  .nav-link {
+    @apply flex items-center gap-3 rounded-md px-3 py-2 text-sm text-text-secondary transition hover:bg-surface-200 hover:text-text-primary;
+  }
+
+  .nav-link--active {
+    @apply bg-surface-200 text-text-primary;
+  }
+
+  .kpi {
+    @apply surface-card flex flex-col gap-1 px-4 py-3;
+  }
+
+  .kpi-label {
+    @apply text-xs uppercase tracking-[0.3em] text-text-tertiary;
+  }
+
+  .kpi-value {
+    @apply text-xl font-semibold text-text-primary;
+  }
+
+  .neon-button {
+    @apply flex items-center justify-center rounded-full border border-profit-start/40 bg-profit-flow px-6 py-3 text-sm font-semibold text-void shadow-glow transition hover:scale-[1.02];
+  }
+
+  .ghost-button {
+    @apply rounded-md border border-border-subtle px-4 py-2 text-sm text-text-secondary transition hover:text-text-primary;
+  }
+
+  .input-field {
+    @apply w-full rounded-md border border-border-subtle bg-surface-200 px-3 py-2 text-sm text-text-primary outline-none focus:border-profit-start/60;
+  }
+
+  .table-head {
+    @apply text-xs uppercase tracking-[0.2em] text-text-tertiary;
+  }
+
+  .badge {
+    @apply inline-flex items-center gap-1 rounded-full border border-border-subtle px-2 py-1 text-xs text-text-secondary;
+  }
+
+  .badge--burn {
+    @apply border-burn-start/40 text-burn-start;
+  }
+
+  .badge--profit {
+    @apply border-profit-start/40 text-profit-start;
+  }
+
+  .badge--zombie {
+    @apply border-zombie-start/40 text-zombie-start;
+  }
+
+  .badge--flag {
+    @apply border-amber-400/50 text-amber-300;
+  }
+}
+
+@layer utilities {
+  .text-glow {
+    text-shadow: 0 0 18px rgba(34, 197, 94, 0.35);
+  }
+
+  .text-glow-burn {
+    text-shadow: 0 0 18px rgba(239, 68, 68, 0.35);
+  }
+
+  .text-glow-ai {
+    text-shadow: 0 0 18px rgba(217, 70, 239, 0.35);
+  }
+}
+
+/* React Flow overrides */
+.react-flow__renderer {
+  background: transparent;
+}
+
+.react-flow__edge-path {
+  stroke-width: 2.5;
+  stroke-linecap: round;
+}
+
+.react-flow__controls button {
+  background: #121212;
+  border-color: #27272a;
+  color: #f8fafc;
+}
+
+.react-flow__minimap {
+  background: #121212;
+  border: 1px solid #27272a;
+  border-radius: 8px;
+}
+
+.react-flow__attribution {
+  display: none;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #27272a;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
