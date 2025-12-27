@@ -3,11 +3,10 @@ import os
 from pathlib import Path
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from alembic import command
-from alembic.config import Config
 
-from .api.v1.api import api_router
-from .database import Base, engine
+print("Main module loading...")
+
+from app.api.v1.api import api_router
 
 app = FastAPI(
     title="BetMetric API",
@@ -29,13 +28,9 @@ app.add_middleware(
 app.include_router(api_router, prefix="/v1")
 
 @app.on_event("startup")
-async def on_startup():
-    if os.getenv("AUTO_RUN_MIGRATIONS", "true").lower() in {"1", "true", "yes"}:
-        alembic_cfg = Config(str(Path(__file__).resolve().parents[1] / "alembic.ini"))
-        await asyncio.to_thread(command.upgrade, alembic_cfg, "head")
-    elif os.getenv("AUTO_CREATE_TABLES", "true").lower() in {"1", "true", "yes"}:
-        async with engine.begin() as conn:
-            await conn.run_sync(Base.metadata.create_all)
+async def startup_event():
+    print("Application startup event triggered!")
+    print("Connecting to DB...")
 
 @app.get("/")
 async def root():
