@@ -15,7 +15,12 @@ router = APIRouter(
 
 @router.get("/tree", response_model=List[schemas.BetTree])
 async def get_full_tree(db: AsyncSession = Depends(get_db)):
-    return await crud.get_full_bet_tree(db)
+    try:
+        return await crud.get_full_bet_tree(db)
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=f"INTERNAL ERROR DEBUG: {str(e)} Type: {type(e).__name__}")
 
 @router.get("/tree/{bet_id}", response_model=schemas.BetTree)
 async def get_bet_subtree(bet_id: UUID, db: AsyncSession = Depends(get_db)):
