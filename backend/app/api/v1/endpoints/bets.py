@@ -45,7 +45,12 @@ async def read_bets(
     status: Optional[BetStatus] = None, 
     db: AsyncSession = Depends(get_db)
 ):
-    return await crud.get_bet_summaries(db, skip=skip, limit=limit, status=status)
+    try:
+        return await crud.get_bet_summaries(db, skip=skip, limit=limit, status=status)
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=f"INTERNAL ERROR DEBUG: {str(e)} Type: {type(e).__name__}")
 
 @router.get("/{bet_id}", response_model=schemas.BetSummary)
 async def read_bet(bet_id: UUID, db: AsyncSession = Depends(get_db)):
