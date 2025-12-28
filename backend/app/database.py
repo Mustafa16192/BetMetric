@@ -6,6 +6,12 @@ print("Initializing Database module...")
 
 # Default to the internal Docker URL if not set
 DATABASE_URL = os.getenv("DATABASE_URL", "postgresql+asyncpg://user:password@db:5432/betmetric_db")
+
+# Asyncpg (used by SQLAlchemy) does not support 'sslmode' in the connection string.
+# It expects 'ssl'. Common cloud providers (like Neon/Railway) might add 'sslmode'.
+if "sslmode=" in DATABASE_URL:
+    DATABASE_URL = DATABASE_URL.replace("sslmode=", "ssl=")
+
 print(f"DATABASE_URL configured: {DATABASE_URL.split('@')[1] if '@' in DATABASE_URL else 'UNKNOWN'}")
 
 engine = create_async_engine(DATABASE_URL, echo=True)
