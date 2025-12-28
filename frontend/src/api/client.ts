@@ -1,6 +1,7 @@
 import type { BetSummary, BetTreeNode, SummaryMetrics, Transaction } from '../types/api'
 
 const API_BASE = import.meta.env.VITE_API_URL ?? 'http://localhost:8000'
+console.log('API Client Configured URL:', API_BASE)
 const API_PREFIX = `${API_BASE.replace(/\/$/, '')}/v1`
 
 type RequestOptions = RequestInit & { json?: unknown }

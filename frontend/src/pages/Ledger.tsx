@@ -56,9 +56,17 @@ export default function Ledger() {
         <div>
           <p className="text-xs uppercase tracking-[0.3em] text-text-tertiary">Ledger</p>
           <h2 className="text-2xl font-semibold">Truth Ledger</h2>
-          <p className="text-sm text-text-secondary">
-            Every transaction tagged to a bet. No exceptions.
-          </p>
+          <div className="flex items-center gap-2">
+            <p className="text-sm text-text-secondary">
+              Every transaction tagged to a bet. No exceptions.
+            </p>
+            <button 
+              onClick={loadLedger} 
+              className="text-xs text-brand-primary hover:text-brand-secondary underline"
+            >
+              Refresh Data ({betList.length} bets loaded)
+            </button>
+          </div>
         </div>
         <button type="button" className="neon-button" onClick={() => setShowModal(true)}>
           + Add Transaction
