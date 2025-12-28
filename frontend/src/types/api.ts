@@ -1,4 +1,4 @@
-export type BetStatus = 'active' | 'dormant' | 'zombie' | 'won' | 'lost'
+export type BetStatus = 'ACTIVE' | 'DORMANT' | 'ZOMBIE' | 'WON' | 'LOST'
 export type BetHealth = 'profit' | 'burn' | 'warning' | 'zombie'
 
 export type BetSummary = {
@@ -31,7 +31,7 @@ export type Transaction = {
   bet_id: string
   bet_name: string
   amount: string
-  type: 'Revenue' | 'Expense' | 'revenue' | 'expense'
+  type: 'REVENUE' | 'EXPENSE'
   description: string
   source?: string | null
   date: string

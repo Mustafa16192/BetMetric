@@ -7,15 +7,15 @@ from sqlalchemy.orm import relationship
 from .database import Base
 
 class BetStatus(str, Enum):
-    ACTIVE = "active"
-    DORMANT = "dormant"
-    ZOMBIE = "zombie"
-    WON = "won"
-    LOST = "lost"
+    ACTIVE = "ACTIVE"
+    DORMANT = "DORMANT"
+    ZOMBIE = "ZOMBIE"
+    WON = "WON"
+    LOST = "LOST"
 
 class TransactionType(str, Enum):
-    REVENUE = "revenue"
-    EXPENSE = "expense"
+    REVENUE = "REVENUE"
+    EXPENSE = "EXPENSE"
 
 class Bet(Base):
     __tablename__ = "bets"

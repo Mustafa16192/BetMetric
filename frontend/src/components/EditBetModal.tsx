@@ -9,12 +9,12 @@ type Props = {
   onSubmit: (betId: string, payload: { name?: string; budget?: number; status?: BetStatus; description?: string }) => Promise<void>
 }
 
-const statusOptions: BetStatus[] = ['active', 'dormant', 'zombie', 'won', 'lost']
+const statusOptions: BetStatus[] = ['ACTIVE', 'DORMANT', 'ZOMBIE', 'WON', 'LOST']
 
 export default function EditBetModal({ isOpen, bet, onClose, onSubmit }: Props) {
   const [name, setName] = useState('')
   const [budget, setBudget] = useState('')
-  const [status, setStatus] = useState<BetStatus>('active')
+  const [status, setStatus] = useState<BetStatus>('ACTIVE')
   const [description, setDescription] = useState('')
   const [error, setError] = useState('')
   const [saving, setSaving] = useState(false)

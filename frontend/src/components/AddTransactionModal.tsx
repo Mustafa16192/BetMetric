@@ -9,14 +9,14 @@ type Props = {
   onSubmit: (payload: {
     bet_id: string
     amount: number
-    type: 'revenue' | 'expense'
+    type: 'REVENUE' | 'EXPENSE'
     description: string
     source?: string
   }) => Promise<void>
 }
 
 export default function AddTransactionModal({ isOpen, onClose, bets, onSubmit }: Props) {
-  const [type, setType] = useState<'revenue' | 'expense'>('revenue')
+  const [type, setType] = useState<'REVENUE' | 'EXPENSE'>('REVENUE')
   const [amount, setAmount] = useState('')
   const [betId, setBetId] = useState('')
   const [description, setDescription] = useState('')
@@ -82,22 +82,22 @@ export default function AddTransactionModal({ isOpen, onClose, bets, onSubmit }:
           <button
             type="button"
             className={`flex-1 rounded-md border px-3 py-2 text-sm ${
-              type === 'revenue'
+              type === 'REVENUE'
                 ? 'border-profit-start text-profit-start'
                 : 'border-border-subtle text-text-secondary'
             }`}
-            onClick={() => setType('revenue')}
+            onClick={() => setType('REVENUE')}
           >
             Revenue
           </button>
           <button
             type="button"
             className={`flex-1 rounded-md border px-3 py-2 text-sm ${
-              type === 'expense'
+              type === 'EXPENSE'
                 ? 'border-burn-start text-burn-start'
                 : 'border-border-subtle text-text-secondary'
             }`}
-            onClick={() => setType('expense')}
+            onClick={() => setType('EXPENSE')}
           >
             Expense
           </button>

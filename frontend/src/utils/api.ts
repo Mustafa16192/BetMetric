@@ -15,7 +15,7 @@ export interface Transaction {
   id: string;
   bet_id: string;
   amount: number;
-  type: 'revenue' | 'expense';
+  type: 'REVENUE' | 'EXPENSE';
   description: string;
   date: string;
 }
@@ -23,7 +23,7 @@ export interface Transaction {
 export interface TransactionCreate {
   bet_id: string;
   amount: number;
-  type: 'revenue' | 'expense';
+  type: 'REVENUE' | 'EXPENSE';
   description: string;
   date?: string;
 }
@@ -33,7 +33,7 @@ export interface Bet {
   name: string;
   description?: string;
   budget: number;
-  status: 'active' | 'dormant' | 'zombie' | 'won' | 'lost';
+  status: 'ACTIVE' | 'DORMANT' | 'ZOMBIE' | 'WON' | 'LOST';
   flagged?: boolean;
   parent_id?: string | null;
   created_at?: string;
@@ -65,7 +65,7 @@ export interface BetUpdate {
   name?: string;
   description?: string;
   budget?: number;
-  status?: 'active' | 'dormant' | 'won' | 'lost';
+  status?: 'ACTIVE' | 'DORMANT' | 'ZOMBIE' | 'WON' | 'LOST';
   parent_id?: string | null;
 }
 
